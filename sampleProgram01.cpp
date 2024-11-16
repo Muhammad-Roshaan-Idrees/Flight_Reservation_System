@@ -93,7 +93,7 @@ public:
     int duration; 
     string aircraftType;
     int totalSeats;
-    int availableSeats;
+    int availableSeats; 
     double basePrice;
     string seatClasses[3]; 
     double seatPrices[3]; 
