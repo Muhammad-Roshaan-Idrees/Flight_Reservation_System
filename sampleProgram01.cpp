@@ -170,3 +170,72 @@ public:
         cout << "Flight status updated to: " << status << endl;
     }
 };
+
+class Passenger {
+public:
+    string passengerID;
+    string name;
+    string contactNumber;
+    string email;
+    string seatNumber;
+    string ticketClass;
+    double ticketPrice;
+    string specialRequest;
+
+    Passenger() {}
+
+    Passenger(string id, string passengerName, string contact, string emailAddress, 
+              string seat, string tClass, double price, string request = "") {
+        passengerID = id;
+        name = passengerName;
+        contactNumber = contact;
+        email = emailAddress;
+        seatNumber = seat;
+        ticketClass = tClass;
+        ticketPrice = price;
+        specialRequest = request;
+    }
+
+    void displayPassengerDetails() {
+        cout << "Passenger ID: " << passengerID << endl;
+        cout << "Name: " << name << endl;
+        cout << "Contact Number: " << contactNumber << endl;
+        cout << "Email: " << email << endl;
+        cout << "Seat Number: " << seatNumber << endl;
+        cout << "Ticket Class: " << ticketClass << endl;
+        cout << "Ticket Price: $" << ticketPrice << endl;
+        if (!specialRequest.empty()) {
+            cout << "Special Request: " << specialRequest << endl;
+        } else {
+            cout << "Special Request: None" << endl;
+        }
+    }
+
+    void getInfoFromUser() {
+        cout << "Enter Passenger ID: ";
+        cin >> passengerID;
+        cin.ignore(); // To clear the newline character from the buffer
+
+        cout << "Enter Name: ";
+        getline(cin, name);
+
+        cout << "Enter Contact Number: ";
+        getline(cin, contactNumber);
+
+        cout << "Enter Email: ";
+        getline(cin, email);
+
+        cout << "Enter Seat Number: ";
+        getline(cin, seatNumber);
+
+        cout << "Enter Ticket Class (Economy/Business/First): ";
+        getline(cin, ticketClass);
+
+        cout << "Enter Ticket Price: ";
+        cin >> ticketPrice;
+        cin.ignore();
+
+        cout << "Enter Special Request (leave empty if none): ";
+        getline(cin, specialRequest);
+    }
+};
