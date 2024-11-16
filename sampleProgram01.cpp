@@ -239,3 +239,42 @@ public:
         getline(cin, specialRequest);
     }
 };
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+class Ticket {
+public:
+    string ticketID;
+    string flightNumber;
+    string passengerID;
+    string seatNumber;
+    string ticketClass;
+    double ticketPrice;
+    string issueDate;
+    string status;
+
+    Ticket(string tID, string fNumber, string pID, string seat, string tClass, 
+           double price, string date, string tStatus = "Confirmed") {
+        ticketID = tID;
+        flightNumber = fNumber;
+        passengerID = pID;
+        seatNumber = seat;
+        ticketClass = tClass;
+        ticketPrice = price;
+        issueDate = date;
+        status = tStatus;
+    }
+
+    void displayTicketDetails() {
+        cout << "Ticket ID: " << ticketID << endl;
+        cout << "Flight Number: " << flightNumber << endl;
+        cout << "Passenger ID: " << passengerID << endl;
+        cout << "Seat Number: " << seatNumber << endl;
+        cout << "Class: " << ticketClass << endl;
+        cout << "Price: $" << ticketPrice << endl;
+        cout << "Issue Date: " << issueDate << endl;
+        cout << "Status: " << status << endl;
+    }
+};
