@@ -6,8 +6,101 @@
 #include <iostream>
 #include <string>
 #include <cctype>
+#include <fstream>
+#include <windows.h>
+#include <sstream>
 
 using namespace std;
+
+class Login {
+private:
+    string LoginID, Password;
+public:
+    Login() : LoginID(""), Password("") {}
+
+    void setID(string id) { LoginID = id; }
+    void setPW(string pw) { Password = pw; }
+
+    string getID() { return LoginID; }
+    string getPW() { return Password; }
+
+    bool registration();
+    bool login();
+};
+
+bool Login::registration() {
+    system("cls");
+    string id, pw;
+    cout << "\tEnter Login ID: ";
+    cin >> id;
+    setID(id);
+
+    start:
+    cout << "\tEnter A Strong Password: ";
+    cin >> pw;
+    if (pw.length() >= 8) {
+        setPW(pw);
+    } else {
+        cout << "\tEnter Minimum 8 Characters!" << endl;
+        goto start;
+    }
+
+    ofstream outfile("Login.txt", ios::app);
+    if (!outfile) {
+        cout << "\tError: File Can't Open!" << endl;
+        return false;
+    } else {
+        outfile << getID() << " : " << getPW() << endl;
+        cout << "\tUser Registered Successfully!" << endl;
+    }
+    outfile.close();
+    Sleep(3000);
+    return true;
+}
+
+bool Login::login() {
+    system("cls");
+    string id, pw;
+    cout << "\tEnter Login ID: ";
+    cin >> id;
+
+    cout << "\tEnter Password: ";
+    cin >> pw;
+
+    ifstream infile("Login.txt");
+    if (!infile) {
+        cout << "\tError: File Can't Open!" << endl;
+        return false;
+    } else {
+        string line;
+        bool found = false;
+        while (getline(infile, line)) {
+            stringstream ss(line);
+            string userID, userPW;
+            char delimiter;
+            ss >> userID >> delimiter >> userPW;
+
+            if (id == userID && pw == userPW) {
+                found = true;
+                cout << "\tPlease Wait";
+                for (int i = 0; i < 3; i++) {
+                    cout << ".";
+                    Sleep(800);
+                }
+                system("cls");
+                cout << "\tWelcome To This Page!" << endl;
+                break;
+            }
+        }
+        if (!found) {
+            cout << "\tError: Incorrect Login ID Or Password!" << endl;
+        }
+    }
+    infile.close();
+    Sleep(5000);
+    return true;
+};
+
 
 // Added some validation check portion
 
@@ -76,13 +169,12 @@ public:
             sum += n;
             alternate = !alternate;
         }
-        return (sum % 10 == 0);
-    }
+        return (sum % 10==0);
+    }
 };
 
 class Flight {
 public:
-    
     string flightNumber;
     string airline;
     string departureCity;
@@ -90,17 +182,16 @@ public:
     string departureDate;
     string departureTime;
     string arrivalTime;
-    int duration; 
+    int duration;
     string aircraftType;
     int totalSeats;
-    int availableSeats; 
+    int availableSeats;
     double basePrice;
-    string seatClasses[3]; 
-    double seatPrices[3]; 
-    string passengerList[100]; 
-    int passengerCount; 
-    string flightStatus; 
-
+    string seatClasses[3];
+    double seatPrices[3];
+    string passengerList[100];
+    int passengerCount;
+    string flightStatus;
 
     Flight(string flightNum, string airlineName, string depCity, string destCity,
            string depDate, string depTime, string arrTime, int flightDuration,
@@ -120,13 +211,12 @@ public:
         passengerCount = 0;
         flightStatus = "On Time";
 
-       
         seatClasses[0] = "Economy";
         seatClasses[1] = "Business";
         seatClasses[2] = "First Class";
         seatPrices[0] = basePrice;
-        seatPrices[1] = basePrice * 2; 
-        seatPrices[2] = basePrice * 3; 
+        seatPrices[1] = basePrice * 2;
+        seatPrices[2] = basePrice * 3;
     }
 
     // Book a seat for a passenger
@@ -170,6 +260,7 @@ public:
         cout << "Flight status updated to: " << status << endl;
     }
 };
+
 
 class Passenger {
 public:
@@ -239,10 +330,6 @@ public:
         getline(cin, specialRequest);
     }
 };
-#include <iostream>
-#include <string>
-
-using namespace std;
 
 class Ticket {
 public:
@@ -272,9 +359,120 @@ public:
         cout << "Flight Number: " << flightNumber << endl;
         cout << "Passenger ID: " << passengerID << endl;
         cout << "Seat Number: " << seatNumber << endl;
-        cout << "Class: " << ticketClass << endl;
-        cout << "Price: $" << ticketPrice << endl;
-        cout << "Issue Date: " << issueDate << endl;
-        cout << "Status: " << status << endl;
-    }
+        cout << "Ticket Class: " << ticketClass << endl;
+        }
 };
+
+void displayMenu() {
+    cout << "\nFlight Reservation System" << endl;
+    cout << "1. Book Flight" << endl;
+    cout << "2. Cancel Booking" << endl;
+    cout << "3. Update Flight Status" << endl;
+    cout << "4. View Passenger Details" << endl;
+    cout << "5. Exit" << endl;
+    cout << "Enter your choice: ";
+}
+
+int main() {
+    Login log;
+    Validations validations;
+
+    bool loggedIn = false;
+    while (!loggedIn) {
+        system("cls");
+        int val;
+        cout << "\tWelcome To Riphah International Airport\n";
+        cout << "\t************************************\n";
+        cout << "\t1. Register\n";
+        cout << "\t2. Login\n";
+        cout << "\t3. Exit\n";
+        cout << "\tE2nter Choice: ";
+        cin >> val;
+
+        switch (val) {
+            case 1:
+                loggedIn = log.registration();
+                break;
+            case 2:
+                loggedIn = log.login();
+                break;
+            case 3:
+                system("cls");
+                cout << "\tGood Luck!\n";
+                Sleep(3000);
+                exit(0);
+            default:
+                cout << "Invalid Option. Try Again!\n";
+                Sleep(3000);
+        }
+    }
+
+    // Sample flight data
+    Flight flight("PK303", "Pakistan International Airlines", "Lahore", "Karachi",
+                  "15-05-2024", "14:00", "16:00", 2, "Boeing 777", 100, 5000.0);
+
+    int choice;
+    while (true) {
+        displayMenu();
+        cin >> choice;
+
+        switch (choice) {
+            case 1: {
+                // Book a flight
+                string passengerName;
+                cout << "Enter passenger's full name: ";
+                cin.ignore();
+                getline(cin, passengerName);
+                if (flight.bookSeat(passengerName)) {
+                    Passenger passenger;
+                    passenger.getInfoFromUser();
+                    Ticket ticket("T123", flight.flightNumber, passenger.passengerID, passenger.seatNumber,
+                                  passenger.ticketClass, passenger.ticketPrice, "10-04-2024");
+                    ticket.displayTicketDetails();
+                }
+                break;
+            }
+            case 2: {
+                // Cancel booking
+                string passengerName;
+                cout << "Enter passenger's full name for cancellation: ";
+                cin.ignore();
+                getline(cin, passengerName);
+                flight.cancelBooking(passengerName);
+                break;
+            }
+            case 3: {
+                // Update flight status
+                string status;
+                cout << "Enter new flight status: ";
+                cin.ignore();
+                getline(cin, status);
+                flight.updateStatus(status);
+                break;
+            }
+            case 4: {
+                // View passenger details
+                string passengerID;
+                cout << "Enter passenger ID: ";
+                cin.ignore();
+                getline(cin, passengerID);
+                // Simulate fetching and displaying passenger details
+                Passenger passenger(passengerID, "John Doe", "1234567890", "john.doe@example.com", "12A",
+                                    "Economy", 5000.0);
+                passenger.displayPassengerDetails();
+                break;
+            }
+            case 5:
+                cout << "Thank you for using the Flight Reservation System. Goodbye!\n";
+                Sleep(3000);
+                return 0;
+            default:
+                cout << "Invalid option. Please try again.\n";
+                Sleep(3000);
+        }
+    }
+
+    return 0;
+}
+
+
