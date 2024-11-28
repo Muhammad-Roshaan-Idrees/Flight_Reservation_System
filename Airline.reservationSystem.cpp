@@ -30,3 +30,33 @@ public:
              << ", VIP: " << seats.at("VIP") << endl;
     }
 };
+class User {
+public:
+    string username, password, fullName, phoneNumber, cnic, address, postalCode, country, email, city, province, gender;
+    int age;
+    vector<string> notifications;
+
+    User() = default;
+
+    User(string user, string pass, string name, string phone, string id, string addr, string postal, string cnt,
+         string mail, string cty, string prov, string gend, int ag)
+        : username(user), password(pass), fullName(name), phoneNumber(phone), cnic(id), address(addr), postalCode(postal),
+          country(cnt), email(mail), city(cty), province(prov), gender(gend), age(ag) {}
+
+    void displayProfile() const {
+        cout << "Name: " << fullName << ", Email: " << email << ", Phone: " << phoneNumber
+             << ", CNIC: " << cnic << ", Country: " << country << ", City: " << city
+             << ", Province: " << province << ", Gender: " << gender << ", Age: " << age << endl;
+    }
+
+    void viewNotifications() const {
+        if (notifications.empty()) {
+            cout << "No notifications." << endl;
+        } else {
+            cout << "Notifications:" << endl;
+            for (const auto& note : notifications) {
+                cout << "- " << note << endl;
+            }
+        }
+    }
+};
