@@ -137,3 +137,111 @@ public:
         }
         adminNotifications.clear();
     }
+ void deleteFlight()
+    {
+        string flightID;
+        cout << "Enter the Flight ID to delete: ";
+        cin >> flightID;
+
+        auto it = find_if(flights.begin(), flights.end(), [&flightID](const Flight &flight)
+                          { return flight.flightID == flightID; });
+
+        if (it != flights.end())
+        {
+            // Clear all bookings for this flight
+            bookings.erase(flightID);
+
+            // Remove the flight from the flights list
+            flights.erase(it);
+
+            // Notify users about flight cancellation
+            for (auto &user : users)
+            {
+                user.second.notifications.push_back("Flight " + flightID + " has been canceled.");
+            }
+
+            cout << "Flight " << flightID << " has been successfully deleted." << endl;
+        }
+        else
+        {
+            cout << "Flight not found!" << endl;
+        }
+    }
+
+    // Add Flight with Duplicate ID Check
+    void addFlight()
+    {
+        string flightID, destination, departureTime, type;
+        int business, economy, standard, vip;
+
+        cout << "Enter Flight ID: ";
+        cin >> flightID;
+
+        // Check if flight with the same ID already exists
+        auto it = find_if(flights.begin(), flights.end(), [&flightID](const Flight &flight)
+                          { return flight.flightID == flightID; });
+        if (it != flights.end())
+        {
+            cout << "Flight with this ID already exists!" << endl;
+            return;
+        }
+
+        cout << "Enter Destination: ";
+        cin.ignore();
+        getline(cin, destination);
+        cout << "Enter Departure Time: ";
+        getline(cin, departureTime);
+        cout << "Enter Type (National/International): ";
+        getline(cin, type);
+
+        cout << "Enter Available Seats for Business, Economy, Standard, and VIP classes: ";
+        cin >> business >> economy >> standard >> vip;
+
+        flights.emplace_back(flightID, destination, departureTime, type, business, economy, standard, vip);
+        cout << "Flight added successfully!" << endl;
+    }
+
+    // User Functions
+    bool login(const string &username, const string &password)
+    {
+        if (users.find(username) != users.end() && users[username].password == password)
+        {
+            currentUser = username;
+            cout << "Login successful! Welcome, " << users[currentUser].fullName << endl;
+            return true;
+        }
+        cout << "Invalid credentials!" << endl;
+        return false;
+    }
+
+    bool isUsernameUnique(const string &username) {
+    return users.find(username) == users.end();  // Checks if the username is already taken
+}
+
+bool isValidUsername(const string &username) {
+    return username.length() >= 4;  // Username must be at least 4 characters long
+}
+
+bool isValidPassword(const string &password) {
+    return password.length() >= 6;  // Password must be at least 6 characters long
+}
+
+bool isValidPhoneNumber(const string &phoneNumber) {
+    return regex_match(phoneNumber, regex(R"(\d{11})"));  // Validates a 11-digit phone number
+}
+
+bool isValidEmail(const string &email) {
+    return regex_match(email, regex(R"([a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,})"));  // Simple email format validation
+}
+
+bool isValidCNIC(const string &cnic) {
+    return regex_match(cnic, regex(R"(\d{5}-\d{7}-\d)"));  // Validates CNIC format e.g., 12345-1234567-1
+}
+
+bool isValidPostalCode(const string &postalCode) {
+    return regex_match(postalCode, regex(R"(\d{5})"));  // Validates postal code format e.g., 12345
+}
+
+bool isValidAge(int age) {
+    return age >= 18 && age <= 100;  // Age should be between 18 and 100
+}
