@@ -10,6 +10,103 @@ public:
     string password;
 
     SubInspector(string n, string p) : name(n), password(p) {}
+    void editCase() {
+        string caseId, newDescription;
+        cout << "Enter Case ID to edit: ";
+        cin >> caseId;
+
+        ifstream caseFile("cases.txt");
+        ofstream tempFile("temp.txt");
+        string line;
+        bool found = false;
+
+        if (caseFile.is_open() && tempFile.is_open()) {
+            while (getline(caseFile, line)) {
+                if (line.find(caseId) == 0) {
+                    found = true;
+                    cout << "Enter new case description: ";
+                    cin.ignore();
+                    getline(cin, newDescription);
+                    size_t pos = line.rfind(","); // Find last comma
+                    line = line.substr(0, pos) + "," + newDescription; // Replace description
+                }
+                tempFile << line << endl;
+            }
+            caseFile.close();
+            tempFile.close();
+            if (found) {
+                remove("cases.txt");
+                rename("temp.txt", "cases.txt");
+                cout << "Case updated successfully.\n";
+            } else {
+                cout << "Case ID not found.\n";
+                remove("temp.txt");
+            }
+        }
+    }
+
+    void trackCaseStatus(const string& caseId) {
+        ifstream resolvedFile("resolved.txt"), deniedFile("denial.txt");
+        string line;
+        bool found = false;
+
+        while (getline(resolvedFile, line)) {
+            if (line.find(caseId) != string::npos) {
+                cout << "Status: Approved\nDetails: " << line << endl;
+                found = true;
+                break;
+            }
+        }
+        resolvedFile.close();
+
+        if (!found) {
+            while (getline(deniedFile, line)) {
+                if (line.find(caseId) != string::npos) {
+                    cout << "Status: Denied\nDetails: " << line << endl;
+                    found = true;
+                    break;
+                }
+            }
+        }
+        deniedFile.close();
+
+        if (!found) cout << "Status: Pending\n";
+    }
+    void searchCase(const string& query) {
+        ifstream caseFile("cases.txt");
+        string line;
+        bool found = false;
+
+        while (getline(caseFile, line)) {
+            if (line.find(query) != string::npos) {
+                cout << "Found Case: " << line << endl;
+                found = true;
+            }
+        }
+        caseFile.close();
+
+        if (!found) cout << "No matching cases found.\n";
+    }
+    void generateReport() {
+        ifstream caseFile("cases.txt"), resolvedFile("resolved.txt"), deniedFile("denial.txt");
+        ofstream reportFile("report.txt");
+        string line;
+
+        reportFile << "Pending Cases:\n";
+        while (getline(caseFile, line)) reportFile << line << endl;
+        caseFile.close();
+
+        reportFile << "\nApproved Cases:\n";
+        while (getline(resolvedFile, line)) reportFile << line << endl;
+        resolvedFile.close();
+
+        reportFile << "\nDenied Cases:\n";
+        while (getline(deniedFile, line)) reportFile << line << endl;
+        deniedFile.close();
+
+        reportFile.close();
+        cout << "Report generated as report.txt.\n";
+    }
 
     bool login(string inputName, string inputPassword) {
         return inputName == name && inputPassword == password;
@@ -86,7 +183,32 @@ public:
     bool login(string inputName, string inputPassword) {
         return inputName == name && inputPassword == password;
     }
+    //added new function
+    void denyCase(int caseChoice) {
+        ifstream caseFile("cases.txt");
+        ofstream denialFile("denial.txt", ios::app);
+        string line, comment;
+        int caseNumber = 1;
+        string deniedCase;
 
+        if (caseFile.is_open() && denialFile.is_open()) {
+            while (getline(caseFile, line)) {
+                if (caseNumber == caseChoice) {
+                    cout << "Enter comment for denial: ";
+                    cin.ignore();
+                    getline(cin, comment);
+                    denialFile << line << " | Comment: " << comment << endl;
+                    cout << "Case denied with comment.\n";
+                    break;
+                }
+                caseNumber++;
+            }
+            caseFile.close();
+            denialFile.close();
+        }
+    }
+
+    
     void viewAndApproveCases() {
         ifstream caseFile("cases.txt");
         string line;
