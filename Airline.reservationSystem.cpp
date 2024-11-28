@@ -60,3 +60,19 @@ public:
         }
     }
 };
+class AirlineSystem {
+private:
+    vector<Flight> flights;
+    map<string, User> users;
+    map<string, vector<pair<string, string>>> bookings; // Flight ID -> (username, seat class)
+    vector<pair<string, string>> adminNotifications;    // Pending approvals (flightID, username)
+    string currentUser;
+    string adminUsername = "admin";
+    string adminPassword = "admin";
+
+public:
+    AirlineSystem() {
+        // Example Flights
+        flights.emplace_back("F001", "New York", "10:00 AM", "International", 10, 20, 15, 5);
+        flights.emplace_back("F002", "London", "2:00 PM", "International", 8, 18, 12, 4);
+    }
