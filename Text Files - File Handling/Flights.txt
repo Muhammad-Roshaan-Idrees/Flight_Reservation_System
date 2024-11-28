@@ -1,1 +1,43 @@
+these are 5 random flights that are going to contain flights from airlines such as Qatar Airways, Emirates, PIA, AirBlue, rest of the details shall be added accordingly
 
+Air Blue:
+Air Blue:
+Air Blue:
+Air Blue:
+Air Blue:
+Air Blue: 
+
+PIA:
+PIA:
+PIA:
+PIA:
+PIA: 
+PIA:
+
+Qatar Airways:
+Qatar Airways:
+Qatar Airways:
+Qatar Airways:
+Qatar Airways:
+Qatar Airways:
+
+
+Fly Emirates:
+Fly Emirates:
+Fly Emirates:
+Fly Emirates:
+Fly Emirates:
+Fly Emirates:
+
+
+Etihad Airways:
+Etihad Airways:
+Etihad Airways:
+Etihad Airways:
+Etihad Airways:
+
+
+added some basic flight information such as 
+- flight airline
+- flight departure country along with destination country
+- 
