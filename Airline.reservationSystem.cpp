@@ -379,3 +379,81 @@ void viewNotifications()
     users[currentUser].viewNotifications();
 }
 };
+int main()
+{
+    AirlineSystem system;
+    while (true)
+    {
+        cout << "\n1. Login (User)\n2. Signup\n3. Admin Panel\n0. Exit\nChoose: ";
+        int choice;
+        cin >> choice;
+        if (choice == 0)
+            break;
+
+        switch (choice)
+        {
+        case 1:
+        {
+            string username, password;
+            cout << "Username: ";
+            cin >> username;
+            cout << "Password: ";
+            cin >> password;
+            if (system.login(username, password))
+            {
+                while (true)
+                {
+                    cout << "\n1. View Flights\n2. Book Flight\n3. View Notifications\n0. Logout\nChoose: ";
+                    int userChoice;
+                    cin >> userChoice;
+                    if (userChoice == 0)
+                        break;
+                    if (userChoice == 1)
+                        system.viewFlights();
+                    else if (userChoice == 2)
+                        system.bookFlight();
+                    else if (userChoice == 3)
+                        system.viewNotifications();
+                    else
+                        cout << "Invalid choice!" << endl;
+                }
+            }
+            break;
+        }
+        case 2:
+            system.signup();
+            break;
+        case 3:
+        {
+            string username, password;
+            cout << "Admin Username: ";
+            cin >> username;
+            cout << "Admin Password: ";
+            cin >> password;
+            if (system.adminLogin(username, password))
+            {
+                while (true)
+                {
+                    cout << "\n1. Add Flight\n2. Delete Flight\n3. View Notifications\n0. Logout\nChoose: ";
+                    int adminChoice;
+                    cin >> adminChoice;
+                    if (adminChoice == 0)
+                        break;
+                    if (adminChoice == 1)
+                        system.addFlight();
+                    else if (adminChoice == 2)
+                        system.deleteFlight();
+                    else if (adminChoice == 3)
+                        system.viewAdminNotifications();
+                    else
+                        cout << "Invalid choice!" << endl;
+                }
+            }
+            break;
+        }
+        default:
+            cout << "Invalid choice!" << endl;
+        }
+    }
+    return 0;
+}
