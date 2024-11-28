@@ -245,3 +245,137 @@ bool isValidPostalCode(const string &postalCode) {
 bool isValidAge(int age) {
     return age >= 18 && age <= 100;  // Age should be between 18 and 100
 }
+void signup() {
+    string username, password, fullName, phoneNumber, cnic, address, postalCode, country, email, city, province, gender;
+    int age;
+
+    // Collect user details
+    cout << "Enter Username: ";
+    cin >> username;
+
+    if (!isValidUsername(username)) {
+        cout << "Username must be at least 4 characters long.\n";
+        return;
+    }
+
+    if (!isUsernameUnique(username)) {
+        cout << "Username already exists. Please choose a different one.\n";
+        return;
+    }
+
+    cout << "Enter Password: ";
+    cin >> password;
+
+    if (!isValidPassword(password)) {
+        cout << "Password must be at least 6 characters long.\n";
+        return;
+    }
+
+    cout << "Enter Full Name: ";
+    cin.ignore();
+    getline(cin, fullName);
+
+    cout << "Enter Phone Number: ";
+    getline(cin, phoneNumber);
+
+    if (!isValidPhoneNumber(phoneNumber)) {
+        cout << "Invalid phone number. It should be 11 digits long.\n";
+        return;
+    }
+
+    cout << "Enter CNIC: ";
+    getline(cin, cnic);
+
+    if (!isValidCNIC(cnic)) {
+        cout << "Invalid CNIC format. It should be in the format 12345-1234567-1.\n";
+        return;
+    }
+
+    cout << "Enter Address: ";
+    getline(cin, address);
+
+    cout << "Enter Postal Code: ";
+    getline(cin, postalCode);
+
+    if (!isValidPostalCode(postalCode)) {
+        cout << "Invalid postal code. It should be 5 digits long.\n";
+        return;
+    }
+
+    cout << "Enter Country: ";
+    getline(cin, country);
+
+    cout << "Enter Email: ";
+    getline(cin, email);
+
+    if (!isValidEmail(email)) {
+        cout << "Invalid email format.\n";
+        return;
+    }
+
+    cout << "Enter City: ";
+    getline(cin, city);
+
+    cout << "Enter Province: ";
+    getline(cin, province);
+
+    cout << "Enter Gender: ";
+    getline(cin, gender);
+
+    cout << "Enter Age: ";
+    cin >> age;
+
+    if (!isValidAge(age)) {
+        cout << "Age must be between 18 and 100.\n";
+        return;
+    }
+
+    // Create and store the user
+    users[username] = User(username, password, fullName, phoneNumber, cnic, address, postalCode, country, email, city, province, gender, age);
+    cout << "Signup successful!" << endl;
+}
+
+
+void viewFlights() const
+{
+    for (const auto &flight : flights)
+    {
+        flight.displayFlight();
+    }
+}
+
+void bookFlight()
+{
+    string flightID, seatClass;
+    cout << "Enter Flight ID to book: ";
+    cin >> flightID;
+    cout << "Choose Seat Class (Business, Economy, Standard, VIP): ";
+    cin >> seatClass;
+
+    for (auto &flight : flights)
+    {
+        if (flight.flightID == flightID)
+        {
+            if (flight.seats[seatClass] > 0)
+            {
+                flight.seats[seatClass]--;
+                bookings[flightID].emplace_back(currentUser, seatClass);
+                adminNotifications.emplace_back(flightID, currentUser);
+                cout << "Booking successful! Waiting for admin approval." << endl;
+                return;
+            }
+            else
+            {
+                cout << "No seats available in " << seatClass << " class." << endl;
+                return;
+            }
+        }
+    }
+    cout << "Flight not found!" << endl;
+}
+
+void viewNotifications()
+{
+    users[currentUser].viewNotifications();
+}
+};
