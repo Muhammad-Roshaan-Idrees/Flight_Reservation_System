@@ -4,33 +4,40 @@
 #include <vector>
 #include <iomanip>
 #include <algorithm>
+#include <regex>
 using namespace std;
 
 // Flight Class
-class Flight {
+class Flight
+{
 public:
     string flightID;
     string destination;
     string departureTime;
-    string type;                   // National or International
-    map<string, int> seats;        // Class -> Available Seats
+    string type;            // National or International
+    map<string, int> seats; // Class -> Available Seats
 
     Flight(string id, string dest, string time, string flightType, int business, int economy, int standard, int vip)
-        : flightID(id), destination(dest), departureTime(time), type(flightType) {
+        : flightID(id), destination(dest), departureTime(time), type(flightType)
+    {
         seats["Business"] = business;
         seats["Economy"] = economy;
         seats["Standard"] = standard;
         seats["VIP"] = vip;
     }
 
-    void displayFlight() const {
+    void displayFlight() const
+    {
         cout << "Flight ID: " << flightID << ", Type: " << type << ", Destination: " << destination
              << ", Departure: " << departureTime << "\nAvailable Seats -> Business: " << seats.at("Business")
              << ", Economy: " << seats.at("Economy") << ", Standard: " << seats.at("Standard")
              << ", VIP: " << seats.at("VIP") << endl;
     }
 };
-class User {
+
+// User Class
+class User
+{
 public:
     string username, password, fullName, phoneNumber, cnic, address, postalCode, country, email, city, province, gender;
     int age;
@@ -43,23 +50,31 @@ public:
         : username(user), password(pass), fullName(name), phoneNumber(phone), cnic(id), address(addr), postalCode(postal),
           country(cnt), email(mail), city(cty), province(prov), gender(gend), age(ag) {}
 
-    void displayProfile() const {
+    void displayProfile() const
+    {
         cout << "Name: " << fullName << ", Email: " << email << ", Phone: " << phoneNumber
              << ", CNIC: " << cnic << ", Country: " << country << ", City: " << city
              << ", Province: " << province << ", Gender: " << gender << ", Age: " << age << endl;
     }
 
-    void viewNotifications() const {
-        if (notifications.empty()) {
+    void viewNotifications() const
+    {
+        if (notifications.empty())
+        {
             cout << "No notifications." << endl;
-        } else {
+        }
+        else
+        {
             cout << "Notifications:" << endl;
-            for (const auto& note : notifications) {
+            for (const auto &note : notifications)
+            {
                 cout << "- " << note << endl;
             }
         }
     }
 };
+
+// AirlineSystem Class
 class AirlineSystem
 {
 private:
@@ -137,7 +152,8 @@ public:
         }
         adminNotifications.clear();
     }
- void deleteFlight()
+
+    void deleteFlight()
     {
         string flightID;
         cout << "Enter the Flight ID to delete: ";
@@ -245,6 +261,7 @@ bool isValidPostalCode(const string &postalCode) {
 bool isValidAge(int age) {
     return age >= 18 && age <= 100;  // Age should be between 18 and 100
 }
+
 void signup() {
     string username, password, fullName, phoneNumber, cnic, address, postalCode, country, email, city, province, gender;
     int age;
@@ -378,7 +395,10 @@ void viewNotifications()
 {
     users[currentUser].viewNotifications();
 }
-};
+}
+;
+
+// Main Program
 int main()
 {
     AirlineSystem system;
