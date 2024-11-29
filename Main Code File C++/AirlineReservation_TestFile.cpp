@@ -721,7 +721,8 @@ void saveFlights()
 void saveAdmins() 
 {
     ofstream file("admin.txt");
-    if (file.is_open()) {
+    if (file.is_open()) 
+    {
         for (const auto& [adminUsername, adminPassword] : admins) 
         {
             file << adminUsername << " " << adminPassword << endl;
@@ -730,9 +731,11 @@ void saveAdmins()
     }
 }
 
-void createDefaultAdmin() {
+void createDefaultAdmin()
+ {
     ofstream file("admin.txt");
-    if (file.is_open()) {
+    if (file.is_open()) 
+    {
         file << "admin admin123" << endl; // Default admin credentials
         file.close();
     }
