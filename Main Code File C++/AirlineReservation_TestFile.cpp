@@ -704,10 +704,13 @@ void saveBookings()
     }
 }
 
-void saveFlights() {
+void saveFlights() 
+{
     ofstream file("flights.txt");
-    if (file.is_open()) {
-        for (const auto& [flightID, flightInfo] : flightDetails) {
+    if (file.is_open()) 
+    {
+        for (const auto& [flightID, flightInfo] : flightDetails) 
+        {
             int totalSeats = flightSeats[flightID].size();
             file << flightID << " " << flightInfo.first << " " << flightInfo.second << " " << totalSeats << endl;
         }
