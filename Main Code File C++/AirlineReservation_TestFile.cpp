@@ -718,10 +718,12 @@ void saveFlights()
     }
 }
 
-void saveAdmins() {
+void saveAdmins() 
+{
     ofstream file("admin.txt");
     if (file.is_open()) {
-        for (const auto& [adminUsername, adminPassword] : admins) {
+        for (const auto& [adminUsername, adminPassword] : admins) 
+        {
             file << adminUsername << " " << adminPassword << endl;
         }
         file.close();
