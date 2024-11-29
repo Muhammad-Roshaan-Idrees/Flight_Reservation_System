@@ -560,7 +560,8 @@ void resetUserPassword()
 }
 
 // View Flight Statistics
-void viewFlightStatistics() {
+void viewFlightStatistics() 
+{
     cout << "Flight Statistics:\n";
 
     // Iterate through each flight
@@ -570,9 +571,12 @@ void viewFlightStatistics() {
 
         // Calculate booked seats by checking the bookings for the flight ID
         int bookedSeats = 0;
-        for (const auto& booking : bookings) {
-            for (const auto& flightBooking : booking.second) {
-                if (flightBooking.find(flightID) != string::npos) {
+        for (const auto& booking : bookings) 
+        {
+            for (const auto& flightBooking : booking.second) 
+            {
+                if (flightBooking.find(flightID) != string::npos) 
+                {
                     bookedSeats++;
                 }
             }
@@ -591,14 +595,16 @@ void viewFlightStatistics() {
 }
 
 // Set Flight Price
-void setFlightPrice() {
+void setFlightPrice() 
+{
     string flightID;
     double price;
 
     cout << "Enter Flight ID to set price: ";
     cin >> flightID;
 
-    if (flightDetails.find(flightID) == flightDetails.end()) {
+    if (flightDetails.find(flightID) == flightDetails.end()) 
+    {
         cout << "Flight not found.\n";
         return;
     }
@@ -617,7 +623,8 @@ void loadFlights() {
     if (file.is_open()) {
         string flightID, source, destination;
         int totalSeats;
-        while (file >> flightID >> source >> destination >> totalSeats) {
+        while (file >> flightID >> source >> destination >> totalSeats) 
+        {
             flightDetails[flightID] = {source, destination};
             queue<int> seats;
             for (int i = 1; i <= totalSeats; ++i) {
@@ -630,18 +637,21 @@ void loadFlights() {
     }
 }
 
-void loadUsers() {
+void loadUsers() 
+{
     ifstream file("users.txt");
     if (file.is_open()) {
         string username, password;
-        while (file >> username >> password) {
+        while (file >> username >> password) 
+        {
             users[username] = password;
         }
         file.close();
     }
 }
 
-void loadBookings() {
+void loadBookings() 
+{
     ifstream file("bookings.txt");
     if (file.is_open()) {
         string username, flightID, seatNumber;
@@ -652,32 +662,41 @@ void loadBookings() {
     }
 }
 
-void loadAdmins() {
+void loadAdmins() 
+{
     ifstream file("admin.txt");
     if (file.is_open()) {
         string adminUsername, adminPassword;
-        while (file >> adminUsername >> adminPassword) {
+        while (file >> adminUsername >> adminPassword) 
+        {
             admins[adminUsername] = adminPassword;
         }
         file.close();
     }
 }
 
-void saveUsers() {
+void saveUsers() 
+{
     ofstream file("users.txt");
-    if (file.is_open()) {
-        for (const auto& [username, password] : users) {
+    if (file.is_open()) 
+    {
+        for (const auto& [username, password] : users) 
+        {
             file << username << " " << password << endl;
         }
         file.close();
     }
 }
 
-void saveBookings() {
+void saveBookings() 
+{
     ofstream file("bookings.txt");
-    if (file.is_open()) {
-        for (const auto& [username, bookingsList] : bookings) {
-            for (const string& booking : bookingsList) {
+    if (file.is_open()) 
+    {
+        for (const auto& [username, bookingsList] : bookings) 
+        {
+            for (const string& booking : bookingsList) 
+            {
                 file << username << " " << booking << endl;
             }
         }
