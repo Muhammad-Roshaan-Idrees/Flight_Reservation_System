@@ -736,17 +736,19 @@ void createDefaultAdmin()
     ofstream file("admin.txt");
     if (file.is_open()) 
     {
-        file << "admin admin123" << endl; // Default admin credentials
+        file << "admin admin123" << endl; 
         file.close();
     }
 }
 
-void clearInputBuffer() {
-    cin.clear(); // Clear any error flags
-    cin.ignore(numeric_limits<streamsize>::max(), '\n'); // Discard invalid input
+void clearInputBuffer() 
+{
+    cin.clear(); 
+    cin.ignore(numeric_limits<streamsize>::max(), '\n'); 
 }
 
-int main() {
+int main() 
+{
     // Load data from files
     loadUsers();
     loadFlights();
@@ -754,7 +756,8 @@ int main() {
     loadAdmins();
 
     // Check if admin file is empty and create default admin if necessary
-    if (admins.empty()) {
+    if (admins.empty()) 
+    {
         createDefaultAdmin();
         loadAdmins(); // Reload admins after creating default
     }
