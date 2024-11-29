@@ -618,20 +618,23 @@ void setFlightPrice()
 }
 
 // Helper Functions
-void loadFlights() {
+void loadFlights()
+ {
     ifstream file("flights.txt");
-    if (file.is_open()) {
+    if (file.is_open()) 
+    {
         string flightID, source, destination;
         int totalSeats;
         while (file >> flightID >> source >> destination >> totalSeats) 
         {
             flightDetails[flightID] = {source, destination};
             queue<int> seats;
-            for (int i = 1; i <= totalSeats; ++i) {
+            for (int i = 1; i <= totalSeats; ++i) 
+            {
                 seats.push(i);
             }
             flightSeats[flightID] = seats;
-            flightPrices[flightID] = 100.0; // Default price
+            flightPrices[flightID] = 10000.0; // Default price
         }
         file.close();
     }
@@ -640,7 +643,8 @@ void loadFlights() {
 void loadUsers() 
 {
     ifstream file("users.txt");
-    if (file.is_open()) {
+    if (file.is_open())
+     {
         string username, password;
         while (file >> username >> password) 
         {
