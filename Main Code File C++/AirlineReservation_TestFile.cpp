@@ -657,9 +657,11 @@ void loadUsers()
 void loadBookings() 
 {
     ifstream file("bookings.txt");
-    if (file.is_open()) {
+    if (file.is_open())
+     {
         string username, flightID, seatNumber;
-        while (file >> username >> flightID >> seatNumber) {
+        while (file >> username >> flightID >> seatNumber) 
+        {
             bookings[username].push_back(flightID + seatNumber);
         }
         file.close();
