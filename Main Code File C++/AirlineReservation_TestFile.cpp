@@ -4,18 +4,18 @@
 #include <queue>
 #include <vector>
 #include <string>
-#include <iomanip> // For std::setw
-#include <limits>  // For std::numeric_limits
+#include <iomanip>
+#include <limits>  
 
 using namespace std;
 
 // Data Structures
-unordered_map<string, string> users; // Username -> Password
-unordered_map<string, string> admins; // Admin Username -> Password
-unordered_map<string, pair<string, string>> flightDetails; // Flight ID -> (Source, Destination)
-unordered_map<string, queue<int>> flightSeats; // Flight ID -> Queue of Available Seats
-unordered_map<string, vector<string>> bookings; // Username -> List of Bookings
-unordered_map<string, double> flightPrices; // Flight ID -> Price
+unordered_map<string, string> users;  // Username -> Password
+unordered_map<string, string> admins;  // Admin Username -> Password
+unordered_map<string, pair<string, string>> flightDetails;  // Flight ID -> (Source, Destination)
+unordered_map<string, queue<int>> flightSeats;  // Flight ID -> Queue of Available Seats
+unordered_map<string, vector<string>> bookings;  // Username -> List of Bookings
+unordered_map<string, double> flightPrices;  // Flight ID -> Price
 
 // Function Prototypes
 void mainMenu();
@@ -55,10 +55,11 @@ void saveBookings();
 void saveFlights();
 void saveAdmins();
 void createDefaultAdmin();
-void clearInputBuffer(); // Helper function to clear input buffer
+void clearInputBuffer(); 
 
 // Main Menu
-void mainMenu() {
+void mainMenu()
+ {
     int choice;
     do {
         cout << "\n--- Airline Reservation System ---\n";
@@ -85,18 +86,21 @@ void mainMenu() {
             default:
                 cout << "Invalid choice. Please try again.\n";
         }
-    } while (choice != 4);
+    }
+    while (choice != 4);
 }
 
 // User Registration
-void registerUser () {
+void registerUser ()
+ {
     string username, password;
     cout << "\n--- Register as a New User ---\n";
     cout << "Enter Username: ";
     cin >> username;
 
     // Check for existing username
-    if (users.find(username) != users.end()) {
+    if (users.find(username) != users.end()) 
+    {
         cout << "Username already exists. Try again.\n";
         return;
     }
@@ -110,7 +114,8 @@ void registerUser () {
 }
 
 // User Login
-void loginUser () {
+void loginUser ()
+ {
     string username, password;
     cout << "\n--- User Login ---\n";
     cout << "Enter Username: ";
@@ -118,16 +123,21 @@ void loginUser () {
     cout << "Enter Password: ";
     cin >> password;
 
-    if (users.find(username) != users.end() && users[username] == password) {
-        cout << "Login successful! Welcome, " << username << ".\n";
+    if (users.find(username) != users.end() && users[username] == password) 
+    {
+        cout << "Login successful!"<<endl;
+        cout<<" Welcome, " << username << ".\n";
         userMenu(username);
-    } else {
+    }
+     else 
+    {
         cout << "Invalid credentials. Please try again.\n";
     }
 }
 
 // Admin Login
-void loginAdmin() {
+void loginAdmin() 
+{
     string adminUsername, adminPassword;
     cout << "\n--- Admin Login ---\n";
     cout << "Enter Admin Username: ";
@@ -135,17 +145,21 @@ void loginAdmin() {
     cout << "Enter Admin Password: ";
     cin >> adminPassword;
 
-    if (admins.find(adminUsername) != admins.end() && admins[adminUsername] == adminPassword) {
+    if (admins.find(adminUsername) != admins.end() && admins[adminUsername] == adminPassword) 
+    {
         cout << "Admin login successful. Welcome, Admin " << adminUsername << ".\n";
         adminMenu(adminUsername);
-    } else {
+    }
+    else 
+    {
         cout << "Invalid admin credentials."<<endl;
         cout << "Please try again.\n";
     }
 }
 
 // User Menu
-void userMenu(const string& username) {
+void userMenu(const string& username) 
+{
     int choice;
     do {
         cout << "\n--- User Menu ---\n";
@@ -160,7 +174,8 @@ void userMenu(const string& username) {
         cout << "Enter your choice: ";
         cin >> choice;
 
-        switch (choice) {
+        switch (choice) 
+        {
             case 1:
                 bookSeat(username);
                 break;
@@ -176,7 +191,8 @@ void userMenu(const string& username) {
             case 5:
                 searchFlights();
                 break;
-            case 6: {
+            case 6: 
+            {
                 string flightID;
                 cout << "Enter Flight ID: ";
                 cin >> flightID;
@@ -192,13 +208,16 @@ void userMenu(const string& username) {
             default:
                 cout << "Invalid choice. Please try again.\n";
         }
-    } while (choice != 8);
+    } 
+    while (choice != 8);
 }
 
 // Admin Menu
-void adminMenu(const string& adminUsername) {
+void adminMenu(const string& adminUsername) 
+{
     int choice;
-    do {
+    do 
+    {
         cout << "\n--- Admin Menu ---\n";
         cout << "1. Add Flight\n";
         cout << "2. Add Admin\n";
@@ -213,7 +232,8 @@ void adminMenu(const string& adminUsername) {
         cout << "Enter your choice: ";
         cin >> choice;
 
-        switch (choice) {
+        switch (choice) 
+        {
             case 1:
                 addFlight();
                 break;
@@ -247,16 +267,19 @@ void adminMenu(const string& adminUsername) {
             default:
                 cout << "Invalid choice. Please try again.\n";
         }
-    } while (choice != 10);
+    }
+     while (choice != 10);
 }
 
 // Booking a Seat
-void bookSeat(const string& username) {
+void bookSeat(const string& username) 
+{
     string flightID;
     cout << "Enter Flight ID to book: ";
     cin >> flightID;
 
-    if (flightSeats.find(flightID) == flightSeats.end() || flightSeats[flightID].empty()) {
+    if (flightSeats.find(flightID) == flightSeats.end() || flightSeats[flightID].empty()) 
+    {
         cout << "No seats available for this flight.\n";
         return;
     }
@@ -270,14 +293,17 @@ void bookSeat(const string& username) {
 }
 
 // Cancel Seat Functionality
-void cancelSeat(const string& username) {
+void cancelSeat(const string& username) 
+{
     string flightID;
     cout << "Enter Flight ID to cancel: ";
     cin >> flightID;
 
     bool found = false;
-    for (auto it = bookings[username].begin(); it != bookings[username].end(); ++it) {
-        if (it->find(flightID) != string::npos) {
+    for (auto it = bookings[username].begin(); it != bookings[username].end(); ++it) 
+    {
+        if (it->find(flightID) != string::npos) 
+        {
             found = true;
             size_t pos = it->find(" (Seat ");
             int seatNumber = stoi(it->substr(pos + 7, it->find(')') - pos - 7));
@@ -289,7 +315,8 @@ void cancelSeat(const string& username) {
         }
     }
 
-    if (!found) {
+    if (!found) 
+    {
         cout << "You have not booked any seat on this flight.\n";
     }
 }
@@ -297,26 +324,33 @@ void cancelSeat(const string& username) {
 // View My Bookings
 void viewMyBookings(const string& username)
 {
-    if (bookings[username].empty()) {
+    if (bookings[username].empty()) 
+    {
         cout << "You have no bookings.\n";
-    } else {
+    } 
+    else 
+    {
         cout << "Your Bookings:\n";
-        for (const string& booking : bookings[username]) {
+        for (const string& booking : bookings[username]) 
+        {
             cout << "- " << booking << endl;
         }
     }
 }
 
 // View Available Seats
-void viewAvailableSeats() {
+void viewAvailableSeats() 
+{
     cout << "Available Flights and Seats:\n";
-    for (const auto& [flightID, seats] : flightSeats) {
+    for (const auto& [flightID, seats] : flightSeats) 
+    {
         cout << "- Flight " << flightID << ": " << seats.size() << " seats available\n";
     }
 }
 
 // Search Flights
-void searchFlights() {
+void searchFlights() 
+{
     string source, destination;
     cout << "Enter Source: ";
     cin >> source;
@@ -324,28 +358,35 @@ void searchFlights() {
     cin >> destination;
 
     cout << "Available Flights from " << source << " to " << destination << ":\n";
-    for (const auto& [flightID, details] : flightDetails) {
-        if (details.first == source && details.second == destination) {
+    for (const auto& [flightID, details] : flightDetails) 
+    {
+        if (details.first == source && details.second == destination) 
+        {
             cout << "- Flight ID: " << flightID << ", Price: $" << flightPrices[flightID] << endl;
         }
     }
 }
 
 // View Flight Details
-void viewFlightDetails(const string& flightID) {
-    if (flightDetails.find(flightID) != flightDetails.end()) {
+void viewFlightDetails(const string& flightID) 
+{
+    if (flightDetails.find(flightID) != flightDetails.end()) 
+    {
         cout << "Flight ID: " << flightID << endl;
         cout << "Source: " << flightDetails[flightID].first << endl;
         cout << "Destination: " << flightDetails[flightID].second << endl;
         cout << "Available Seats: " << flightSeats[flightID].size() << endl;
         cout << "Price: $" << flightPrices[flightID] << endl;
-    } else {
+    }
+     else 
+     {
         cout << "Flight not found.\n";
     }
 }
 
 // Update User Profile
-void updateUserProfile(const string& username) {
+void updateUserProfile(const string& username) 
+{
     string newPassword;
     cout << "Enter new Password: ";
     cin >> newPassword;
@@ -356,14 +397,16 @@ void updateUserProfile(const string& username) {
 }
 
 // Add Flight
-void addFlight() {
+void addFlight() 
+{
     string flightID, source, destination;
     int totalSeats;
 
     cout << "Enter Flight ID: ";
     cin >> flightID;
 
-    if (flightDetails.find(flightID) != flightDetails.end()) {
+    if (flightDetails.find(flightID) != flightDetails.end()) 
+    {
         cout << "Flight ID already exists. Please enter a unique ID.\n";
         return;
     }
@@ -377,11 +420,12 @@ void addFlight() {
 
     flightDetails[flightID] = {source, destination};
     queue<int> seats;
-    for (int i = 1; i <= totalSeats; ++i) {
+    for (int i = 1; i <= totalSeats; ++i) 
+    {
         seats.push(i);
     }
     flightSeats[flightID] = seats;
-    flightPrices[flightID] = 100.0; // Default price
+    flightPrices[flightID] = 10000.0; // Default price
     saveFlights();
     cout << "Flight added successfully.\n";
 }
@@ -392,7 +436,8 @@ void addAdmin() {
     cout << "Enter Admin Username: ";
     cin >> adminUsername;
 
-    if (admins.find(adminUsername) != admins.end()) {
+    if (admins.find(adminUsername) != admins.end()) 
+    {
         cout << "Admin Username already exists. Please enter a unique username.\n";
         return;
     }
@@ -406,36 +451,43 @@ void addAdmin() {
 }
 
 // View All Users
-void viewAllUsers() {
+void viewAllUsers() 
+{
     cout << "All Users:\n";
-    for (const auto& [username, password] : users) {
+    for (const auto& [username, password] : users) 
+    {
         cout << "- " << username << endl;
     }
 }
 
 // View User Bookings
-void viewUserBookings() {
+void viewUserBookings() 
+{
     string username;
     cout << "Enter Username: ";
     cin >> username;
 
-    if (bookings.find(username) == bookings.end()) {
+    if (bookings.find(username) == bookings.end()) 
+    {
         cout << "User  not found.\n";
     } else {
         cout << "Bookings for " << username << ":\n";
-        for (const string& booking : bookings[username]) {
+        for (const string& booking : bookings[username]) 
+        {
             cout << "- " << booking << endl;
         }
     }
 }
 
 // Delete Flight
-void deleteFlight() {
+void deleteFlight() 
+{
     string flightID;
     cout << "Enter Flight ID to delete: ";
     cin >> flightID;
 
-    if (flightDetails.find(flightID) == flightDetails.end()) {
+    if (flightDetails.find(flightID) == flightDetails.end()) 
+    {
         cout << "Flight not found.\n";
         return;
     }
@@ -448,14 +500,16 @@ void deleteFlight() {
 }
 
 // Edit Flight Details
-void editFlightDetails() {
+void editFlightDetails() 
+{
     string flightID, newSource, newDestination;
     int newTotalSeats;
 
     cout << "Enter Flight ID to edit: ";
     cin >> flightID;
 
-    if (flightDetails.find(flightID) == flightDetails.end()) {
+    if (flightDetails.find(flightID) == flightDetails.end()) 
+    {
         cout << "Flight not found.\n";
         return;
     }
@@ -469,7 +523,8 @@ void editFlightDetails() {
 
     flightDetails[flightID] = {newSource, newDestination};
     queue<int> newSeats;
-    for (int i = 1; i <= newTotalSeats; ++i) {
+    for (int i = 1; i <= newTotalSeats; ++i) 
+    {
         newSeats.push(i);
     }
     flightSeats[flightID] = newSeats;
@@ -478,14 +533,16 @@ void editFlightDetails() {
 }
 
 // Reset User Password
-void resetUserPassword() {
+void resetUserPassword() 
+{
     string username, newPassword;
 
     cout << "Enter Username to reset password: ";
     cin >> username;
 
     // Check if the user exists
-    if (users.find(username) == users.end()) {
+    if (users.find(username) == users.end()) 
+    {
         cout << "User  not found.\n";
         return;
     }
@@ -507,7 +564,8 @@ void viewFlightStatistics() {
     cout << "Flight Statistics:\n";
 
     // Iterate through each flight
-    for (const auto& [flightID, seats] : flightSeats) {
+    for (const auto& [flightID, seats] : flightSeats) 
+    {
         int totalSeats = seats.size(); // Available seats
 
         // Calculate booked seats by checking the bookings for the flight ID
