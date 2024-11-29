@@ -6,10 +6,7 @@
 #include <string>
 #include <iomanip> // For std::setw
 #include <limits>  // For std::numeric_limits
-
 using namespace std;
-
-// Data Structures
 unordered_map<string, string> users; // Username -> Password
 unordered_map<string, string> admins; // Admin Username -> Password
 unordered_map<string, pair<string, string>> flightDetails; // Flight ID -> (Source, Destination)
@@ -17,7 +14,7 @@ unordered_map<string, queue<int>> flightSeats; // Flight ID -> Queue of Availabl
 unordered_map<string, vector<string>> bookings; // Username -> List of Bookings
 unordered_map<string, double> flightPrices; // Flight ID -> Price
 
-// Function Prototypes
+
 void mainMenu();
 void userMenu(const string& username);
 void adminMenu(const string& adminUsername);
@@ -45,7 +42,7 @@ void resetUserPassword();
 void viewFlightStatistics();
 void setFlightPrice();
 
-// Helper Functions
+//additional functions for our code
 void loadFlights();
 void loadUsers();
 void loadBookings();
