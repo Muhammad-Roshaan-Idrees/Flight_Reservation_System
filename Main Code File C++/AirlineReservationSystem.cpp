@@ -682,3 +682,5 @@ int main() {
 
     return 0;
 }
+
+// v2.0: Added seat class upgrade option (Economy to Business)
