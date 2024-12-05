@@ -726,3 +726,5 @@ int main() {
 // Removed unused temporary variables and redundant loops
 
 // Completed full regression test and code review pass
+
+// v2.0: Added seat class upgrade option (Economy to Business)
