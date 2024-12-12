@@ -10,3 +10,6 @@
 
 ## - Mar 2025
 - Modularized menu handlers, added loyalty points, and hardened file parsing.
+# Changelog
+## - Dec 2024
+- Added seat upgrade flow and fare recalculation.
