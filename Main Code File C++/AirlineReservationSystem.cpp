@@ -686,3 +686,5 @@ int main() {
 // v2.0: Added seat class upgrade option (Economy to Business)
 
 // Recalculated fare difference during seat class upgrade
+
+// Added baggage allowance calculation by ticket tier
