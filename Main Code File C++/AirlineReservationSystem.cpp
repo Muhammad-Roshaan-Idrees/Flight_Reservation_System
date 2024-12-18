@@ -732,3 +732,5 @@ int main() {
 // Recalculated fare difference during seat class upgrade
 
 // Added baggage allowance calculation by ticket tier
+
+// Fixed extra luggage fee calculation on international routes
