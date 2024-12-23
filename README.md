@@ -5,3 +5,7 @@ Console-based airline booking, seat management, and passenger ticketing system.
 - Multi-leg flight support
 - Seat map visualization
 - Automated ticket export
+
+## Baggage Policy
+- Economy: 20kg checked
+- Business: 35kg checked
