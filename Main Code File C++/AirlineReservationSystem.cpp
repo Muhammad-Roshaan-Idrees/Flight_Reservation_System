@@ -690,3 +690,5 @@ int main() {
 // Added baggage allowance calculation by ticket tier
 
 // Fixed extra luggage fee calculation on international routes
+
+// Implemented flight status flags (On-Time, Delayed, Cancelled)
