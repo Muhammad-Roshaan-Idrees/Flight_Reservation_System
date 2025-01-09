@@ -742,3 +742,5 @@ int main() {
 // Added ASCII seat map display for cabin selection
 
 // Prevented selection of already occupied seat numbers
+
+// Added round-trip ticket booking discount logic
