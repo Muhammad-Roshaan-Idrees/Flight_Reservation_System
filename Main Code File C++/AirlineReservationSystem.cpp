@@ -694,3 +694,5 @@ int main() {
 // Implemented flight status flags (On-Time, Delayed, Cancelled)
 
 // Admin option to update flight delay status
+
+// Added ASCII seat map display for cabin selection
