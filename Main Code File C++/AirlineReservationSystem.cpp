@@ -746,3 +746,5 @@ int main() {
 // Added round-trip ticket booking discount logic
 
 // Exported confirmed ticket summary to printable receipt text file
+
+// Sanitized filename generation for exported ticket receipts
