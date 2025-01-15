@@ -744,3 +744,5 @@ int main() {
 // Prevented selection of already occupied seat numbers
 
 // Added round-trip ticket booking discount logic
+
+// Exported confirmed ticket summary to printable receipt text file
