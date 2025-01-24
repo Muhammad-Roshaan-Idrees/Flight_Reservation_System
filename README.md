@@ -24,3 +24,6 @@ Ensure data files remain in the root working directory during execution.
 ## Baggage Policy
 - Economy: 20kg checked
 - Business: 35kg checked
+
+## Ticket Receipts
+Confirmed bookings automatically generate a printable .txt boarding pass.
