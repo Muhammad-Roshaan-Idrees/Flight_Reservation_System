@@ -9,3 +9,6 @@ Console-based airline booking, seat management, and passenger ticketing system.
 ## Baggage Policy
 - Economy: 20kg checked
 - Business: 35kg checked
+
+## Ticket Receipts
+Confirmed bookings automatically generate a printable .txt boarding pass.
