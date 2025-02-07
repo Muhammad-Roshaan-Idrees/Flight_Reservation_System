@@ -706,3 +706,5 @@ int main() {
 // Sanitized filename generation for exported ticket receipts
 
 // Added passenger CNIC / Passport format validation
+
+// Implemented revenue summary report for admin dashboard
