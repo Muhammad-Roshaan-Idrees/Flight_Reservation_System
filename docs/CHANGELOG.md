@@ -4,3 +4,6 @@
 
 ## - Jan 2025
 - Introduced flight status tracking and admin delay controls.
+
+## - Feb 2025
+- Added printable boarding passes and admin revenue analytics.
