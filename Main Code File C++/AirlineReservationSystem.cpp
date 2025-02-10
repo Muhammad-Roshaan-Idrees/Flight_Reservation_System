@@ -708,3 +708,5 @@ int main() {
 // Added passenger CNIC / Passport format validation
 
 // Implemented revenue summary report for admin dashboard
+
+// Grouped revenue breakdown by domestic vs international flights
