@@ -758,3 +758,5 @@ int main() {
 // Added promo code / seasonal discount validation
 
 // Fixed expired promo code acceptance bug
+
+// Added frequent flyer loyalty points counter per passenger
