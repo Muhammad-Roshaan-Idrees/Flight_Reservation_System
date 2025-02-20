@@ -760,3 +760,5 @@ int main() {
 // Fixed expired promo code acceptance bug
 
 // Added frequent flyer loyalty points counter per passenger
+
+// Refactored menu switch-case into modular handler functions
