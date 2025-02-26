@@ -27,3 +27,6 @@ Ensure data files remain in the root working directory during execution.
 
 ## Ticket Receipts
 Confirmed bookings automatically generate a printable .txt boarding pass.
+
+## Troubleshooting
+Ensure data files remain in the root working directory during execution.
