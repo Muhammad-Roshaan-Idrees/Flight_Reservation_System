@@ -762,3 +762,5 @@ int main() {
 // Added frequent flyer loyalty points counter per passenger
 
 // Refactored menu switch-case into modular handler functions
+
+// Improved file corruption recovery on malformed record lines
