@@ -720,3 +720,5 @@ int main() {
 // Refactored menu switch-case into modular handler functions
 
 // Improved file corruption recovery on malformed record lines
+
+// Standardized error prompts and color/border alignment
