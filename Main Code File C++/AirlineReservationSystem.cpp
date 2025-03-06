@@ -766,3 +766,5 @@ int main() {
 // Improved file corruption recovery on malformed record lines
 
 // Standardized error prompts and color/border alignment
+
+// Removed unused temporary variables and redundant loops
