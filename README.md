@@ -12,3 +12,6 @@ Console-based airline booking, seat management, and passenger ticketing system.
 
 ## Ticket Receipts
 Confirmed bookings automatically generate a printable .txt boarding pass.
+
+## Troubleshooting
+Ensure data files remain in the root working directory during execution.
