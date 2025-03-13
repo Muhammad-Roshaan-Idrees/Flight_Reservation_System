@@ -19,3 +19,6 @@
 
 ## - Feb 2025
 - Added printable boarding passes and admin revenue analytics.
+
+## - Mar 2025
+- Modularized menu handlers, added loyalty points, and hardened file parsing.
